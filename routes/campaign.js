@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 //查
 router.get('/list',filter.authorize,function(req, res, next) {
-    connection.query('SELECT id,name,status,date,creator FROM campaign', function(err, rows, fields) {
+    connection.query('SELECT id,name,status,date,creator FROM campaign WHERE deleted=0', function(err, rows, fields) {
         if (err) throw err;
         res.send(200,{totalCount:rows.length,list:rows});
     });
@@ -19,7 +19,7 @@ router.get('/list',filter.authorize,function(req, res, next) {
 //增
 router.post('/add',filter.authorize, function(req, res, next) {
     var name = req.body.name;
-    var query = 'INSERT INTO campaign (name,creator) VALUES ("'+name+'","")';
+    var query = 'INSERT INTO campaign (name,creator) VALUES ("'+name+'","11")';
     connection.query(query, function(err, rows, fields) {
         if (err) {
             res.send(300,{status:300,msg:'数据库报错'});
@@ -55,7 +55,7 @@ router.post('/updateStatus',filter.authorize, function(req, res, next) {
     });
 });
 //删【物理删除】
-router.post('/updateStatus',filter.authorize,function(req, res, next) {
+router.post('/delete',filter.authorize,function(req, res, next) {
     var id = req.body.id;
     var query = 'UPDATE campaign SET deleted=1 WHERE id='+id;
     connection.query(query, function(err, rows, fields) {

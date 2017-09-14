@@ -36,6 +36,8 @@ app.use('/api/users', users);
 //});
 app.use('/', index);
 app.use('/api/campaign', campaign);
+var signIn = require('./routes/signIn');
+app.use('/api/signIn', signIn);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
