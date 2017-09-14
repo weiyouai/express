@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var activity = require('./routes/activityInfo');
+var campaign = require('./routes/campaign');
 
 var app = express();
 
@@ -35,7 +35,7 @@ app.use('/api/users', users);
 //  next();
 //});
 app.use('/', index);
-app.use('/api/activity', activity);
+app.use('/api/campaign', campaign);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   res.status(404).send('Sorry cant find that!');
